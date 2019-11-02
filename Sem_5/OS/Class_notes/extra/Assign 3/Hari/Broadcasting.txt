@@ -1,0 +1,88 @@
+# include <unistd.h>
+# include <sys/wait.h>
+# include <stdlib.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/msg.h>
+#include <stdio.h>
+#include <string.h>
+
+#define MSGSZ     128
+
+
+
+
+typedef struct msgbuf {
+         long    mtype;
+         char    mtext[MSGSZ];
+    } message_buf;
+
+int main(int argc, char const *argv[])
+{
+
+	int msqid1,msqid2,msqid3;
+	int mflag =IPC_CREAT|0666;
+	key_t key1=1234,key2=2345,key3=3456;
+
+	message_buf WetherReport,rbuf1,rbuf2,rbuf3;
+
+	strcpy(WetherReport.mtext,"Day:PartiallyClouded,Temp:25'C->max&7'C->min,Night:clearSky");
+	WetherReport.mtype=1;
+
+	msqid3=msgget(key3,mflag);
+	msqid2=msgget(key2,mflag);
+	msqid1=msgget(key1,mflag);
+
+	int sent1=msgsnd(msqid1, &WetherReport,strlen(WetherReport.mtext), IPC_NOWAIT);
+	int sent2=msgsnd(msqid2, &WetherReport,strlen(WetherReport.mtext), IPC_NOWAIT);
+	int sent3=msgsnd(msqid3, &WetherReport,strlen(WetherReport.mtext), IPC_NOWAIT);
+	
+	
+	printf("\t\tmessage Broadcasted Sucessfully!!\n\n");
+
+	pid_t channel1=fork();
+	pid_t channel2=fork();
+	pid_t channel3=fork();
+
+	/*if (channel2>0||channel-1>0||channel3>0)
+	{
+		wait(NULL);
+	}*/
+	
+	if (channel1==0)
+	{
+		if (msgrcv(msqid1, &rbuf1, MSGSZ, 1, 0)>=0)
+		{
+			printf("\nchannel1 Recieved a broadcasting --------------------------::\n");
+			puts(rbuf1.mtext);
+		}
+		else
+			printf("Error in Reciving\n");
+	}
+
+	if (channel2==0)
+	{
+		if (msgrcv(msqid2, &rbuf2, MSGSZ, 1, 0)>=0)
+		{
+			printf("\nchannel2 Recieved a broadcasting --------------------------::\n");
+			puts(rbuf2.mtext);
+		}
+		else
+			printf("Error in Reciving\n");
+	}
+
+	if (channel3==0)
+	{
+		if (msgrcv(msqid3, &rbuf3, MSGSZ, 1, 0)>=0)
+		{
+			printf("\nchannel3 Recieved a broadcasting --------------------------::\n");
+			puts(rbuf3.mtext);
+		}
+		else
+			printf("Error in Reciving\n");
+	}
+
+
+
+	return 0;
+}

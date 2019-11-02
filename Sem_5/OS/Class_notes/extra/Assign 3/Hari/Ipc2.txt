@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+
+
+int main(void) {
+	
+	puts("-----------------------Reciever--------------------------");
+	//Create fifo
+	int code = mkfifo("/tmp/my_fifo", 0666);
+	if (code == -1) {
+		perror("mkfifo returned an error - file may already exist");
+	}
+
+	//Open read end
+	int fd = open("/tmp/my_fifo", O_RDONLY);
+	if (fd == -1) {
+		perror("Cannot open FIFO for read");
+		return EXIT_FAILURE;
+	}
+	puts("FIFO OPEN");
+
+	//Read string (upto 255 characters)
+	char stringBuffer[256],ReplyMessage[256];			//String buffer
+	memset(stringBuffer, 0, 256);   //Fill with zeros
+
+	int r =mkfifo("/tmp/myfifo",0666);
+	if (r == -1) {
+		perror("mkfifo r returned an error - file may already exist");
+	}
+	int bd  = open("/tmp/myfifo",O_WRONLY);
+
+	
+	while(1) {
+
+		int bd  = open("/tmp/myfifo",O_WRONLY);
+		int fd = open("/tmp/my_fifo", O_RDONLY);
+		if (fd == -1) {
+		perror("Cannot open FIFO for read");
+		return EXIT_FAILURE;
+		}
+		
+		read(fd, stringBuffer, 25);					//Read string characters
+		puts("caller:-");
+		puts(stringBuffer);	
+		puts("Reciever:-");
+		scanf("%[^\n]s ",ReplyMessage);
+		write(bd,ReplyMessage,strlen(ReplyMessage));
+		sleep(2);
+		strcpy(ReplyMessage,"");
+
+		
+	}
+
+	//puts("EOF found");
+
+	close(fd);
+	close(bd);
+	puts("FIFO Closed");
+
+	return EXIT_SUCCESS;
+}

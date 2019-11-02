@@ -1,0 +1,60 @@
+ #include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+
+//
+// Demonstrates blocking using UNIX open, read, write, close
+//
+
+int main(void) {
+	puts("-------------caller---------------------");
+	char strMessage[201],rbuf[201];
+	memset(rbuf, 0, 256); 
+	
+	//Open fifo for write
+	int fd = open("/tmp/my_fifo", O_WRONLY);
+	if (fd ==  -1) {
+		perror("Cannot open fifo");
+		return EXIT_FAILURE;
+	}
+	int bd =open("/tmp/myfifo",O_RDONLY);
+	if (bd ==  -1) {
+		perror("Cannot open bd fifo2");
+		return EXIT_FAILURE;
+	}
+
+int i=0;
+	while(1){
+
+	int fd = open("/tmp/my_fifo", O_WRONLY);
+	if (fd ==  -1) {
+		perror("Cannot open fifo");
+		return EXIT_FAILURE;
+	}
+	int bd =open("/tmp/myfifo",O_RDONLY);
+	if (bd ==  -1) {
+		perror("Cannot open bd fifo2");
+		return EXIT_FAILURE;
+	}
+		//Write each string in turn
+		puts("caller:-");
+		scanf("%[^\n]s ",strMessage);
+		write(fd, strMessage, strlen(strMessage)); 	//Send string characters
+		sleep(2);
+		read(bd,rbuf,25);
+		puts("Reciever:-");
+		puts(rbuf);
+		
+	
+	
+		strcpy(strMessage,"");		
+}
+
+	close(fd);
+	close(bd);
+	return EXIT_SUCCESS;
+}

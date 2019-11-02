@@ -1,0 +1,136 @@
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/ipc.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/wait.h>
+
+#include <semaphore.h>
+#define MAX_THREAD_SLEEPTIME 2
+
+void *Reading(void *);
+void *Writing(void *);
+int seed =1000;
+int ret_val;
+sem_t mutex;
+sem_t wrt;
+int readCount=0;
+
+int totSleepTime=3;
+int sleeptime;
+
+void *Reading(void *param){
+	srand(seed);
+	int threadSleepTime = totSleepTime;
+do{
+
+	sleeptime = (int) rand() % MAX_THREAD_SLEEPTIME;
+	threadSleepTime = threadSleepTime - sleeptime;
+	sem_wait(&mutex);
+	readCount++;
+	if (readCount==1)
+		sem_wait(&wrt);
+	sem_post(&mutex);
+	
+	FILE *fp;
+	fp=fopen((char *)param,"r");
+	int c;
+		printf("\n------------------------------------------------File content:--------------------------------------------- \n\n");
+	while((c=getc(fp))!=EOF){
+	
+		putchar(c);
+	}
+	fclose(fp);
+	sem_wait(&mutex);
+	readCount--;
+	if (readCount==0)
+	{
+		sem_post(&wrt);
+	}
+	sem_post(&mutex);
+	sleep(sleeptime);
+
+}while(threadSleepTime>0);
+pthread_exit(0);
+
+}
+
+void *Writing(void * param){
+
+	srand(seed);
+
+	int threadSleepTime = totSleepTime;
+do
+{
+	sleeptime = (int) rand() % MAX_THREAD_SLEEPTIME;
+	threadSleepTime = threadSleepTime - sleeptime;
+	sem_wait(&wrt);
+	FILE *fp;
+	fp=fopen((char *)param,"a");
+	int temp = rand()%128;
+	fputc(temp,fp);
+	printf(" Written in file is :- %c by Writer: %ld \n",temp,pthread_self());
+	fclose(fp);
+	sem_post(&wrt);
+	sleep(sleeptime);
+
+} while (threadSleepTime);
+pthread_exit(0);
+
+}
+
+int main(int argc, char const *argv[])
+{
+	pthread_t ReaderID[atoi(argv[1])];
+	pthread_t WriterID[atoi(argv[2])];
+
+	pthread_attr_t attr;
+
+	int count=0;
+	if (argc != 3) {
+    
+    	fprintf(stderr, "usage: <NumberOfReader> <NumberOfWriter> \n");
+    	return -1;
+    }
+    sem_init(&mutex,0,1);
+    sem_init(&wrt,0,1);
+    char filename[20];
+    strcpy(filename,"Sample.txt");
+    pthread_attr_init(&attr);
+
+    printf("----------------------------MAIN-----------------------------------\n");
+
+    printf("CLI Inputs -> NumberOfReader= %d NumberOfWriter= %d \n", atoi(argv[1]) ,atoi(argv[2]));
+
+     for (count = 0; count < atoi(argv[2]); count++) {
+    
+    ret_val = pthread_create(&WriterID[count], &attr, Writing,(char *)filename);
+    printf("Created Writer Thread = %ld count = %d \n", WriterID[count], count);
+  }
+
+    for (count = 0; count < atoi(argv[1]); count++) {
+    
+    ret_val = pthread_create(&ReaderID[count], &attr, Reading,(char *)filename);
+    printf("Created Reader Thread = %ld count = %d \n", ReaderID[count], count);
+  }
+
+   
+
+  for (count=0; count < atoi(argv[1]); count++) {
+    
+    pthread_join(ReaderID[count], NULL);
+    printf("join reader thread = %d \n", count);
+  }
+  for (count=0; count < atoi(argv[2]); count++) {
+    
+    pthread_join(WriterID[count], NULL);
+    printf("join writer thread = %d \n", count);
+  }
+
+
+
+	return 0;
+}
