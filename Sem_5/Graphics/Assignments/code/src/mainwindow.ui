@@ -125,7 +125,7 @@ background-color: rgb(85, 255, 255);</string>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -950,6 +950,37 @@ background-color: rgb(85, 255, 255);</string>
       </property>
       <property name="text">
        <string>Shear</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_7">
+     <attribute name="title">
+      <string>Bezier Curve</string>
+     </attribute>
+     <widget class="QPushButton" name="addPointCurve">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>70</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Add point</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="drawCurve">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>160</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Draw curve</string>
       </property>
      </widget>
     </widget>

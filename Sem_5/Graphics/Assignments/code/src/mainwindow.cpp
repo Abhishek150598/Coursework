@@ -213,6 +213,7 @@ void MainWindow::on_spinBox_valueChanged(int arg1)
     ui->ymax->setRange(-r, r);
     lines.clear();
     polygonVertices.clear();
+    bez.clear();
     resetCanvas();
 }
 
@@ -228,6 +229,7 @@ void MainWindow::on_reset_clicked()
 {
     lines.clear();
     polygonVertices.clear();
+    bez.clear();
     resetCanvas();
 }
 

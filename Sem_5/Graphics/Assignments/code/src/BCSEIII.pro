@@ -32,7 +32,8 @@ SOURCES += \
     ellipse_drawing.cpp \
     polygon_filling.cpp \
     transformation.cpp \
-    clipping.cpp
+    clipping.cpp \
+    bezier_curve.cpp
 
 HEADERS += \
         mainwindow.h \

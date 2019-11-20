@@ -85,7 +85,7 @@ int MainWindow::x_intersect(int y0, int x1, int y1, int x2, int y2)
 {
     if((y0 >= y1 && y0 <= y2) || (y0 >= y2 && y0 <= y1))
     {
-        return x1 + (y0 - y1) * (x2 - x1) / (y2 - y1);
+        return round(x1 + (y0 - y1) * (x2 - x1) / (y2 - y1));
     }
     else
         return 2*r;
@@ -94,29 +94,47 @@ int MainWindow::x_intersect(int y0, int x1, int y1, int x2, int y2)
 void MainWindow::scanLine()
 {
     cout << "LRTB: " << sleft << " " << sright << " " << stop << " " << sbottom << endl;
+
     for(int i = sbottom; i <= stop; i++)
     {
         int n = polygonVertices.size();
         QVector <int> x_int;
         for(int j = 0; j < n; j++)
         {
-            int xi = x_intersect(i, polygonVertices[j].first, polygonVertices[j].second,  polygonVertices[(j+1) % n].first, polygonVertices[(j+1) % n].second);
-            if(xi != 2*r)
+            int x0 = polygonVertices[(j+n-1) % n].first;
+            int y0 = polygonVertices[(j+n-1) % n].second;
+            int x1 = polygonVertices[j].first;
+            int y1 = polygonVertices[j].second;
+            int x2 = polygonVertices[(j+1) % n].first;
+            int y2 = polygonVertices[(j+1) % n].second;
+            if(y1 == i && y2 == i)
             {
-                x_int.push_back(xi);
+                x_int.push_back(x1);
+                x_int.push_back(x2);
             }
+            else if(y1 == i && ((y0 < i && y2 > i) || (y0 > i && y2 < i)))
+            {
+                // do nothing
+            }
+            else
+            {
+                int xi = x_intersect(i, x1, y1, x2, y2);
+                if(xi != 2*r)
+                {
+                    x_int.push_back(xi);
+                }
+            }
+
         }
         sort(x_int.begin(), x_int.end());
 
-        for(int j = 0; j < x_int.size(); j++)
-        {
-            cout << x_int[j] << endl;
-        }
-
         for(int j = 1; j < x_int.size(); j+=2)
         {
-            for(int k = x_int[j-1] + 1; k < x_int[j-1]; k++)
-                point(x_int[k], i);
+            for(int k = x_int[j-1]; k <= x_int[j]; k++)
+            {
+                cout << k << endl;
+                point(k, i);
+            }
         }
     }
 }

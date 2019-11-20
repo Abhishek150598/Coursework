@@ -162,6 +162,9 @@ public:
     QDoubleSpinBox *shx;
     QDoubleSpinBox *shy;
     QPushButton *shear;
+    QWidget *tab_7;
+    QPushButton *addPointCurve;
+    QPushButton *drawCurve;
     QLabel *timeLabel;
     QWidget *layoutWidget11;
     QGridLayout *gridLayout_12;
@@ -781,6 +784,15 @@ public:
         shear->setObjectName(QStringLiteral("shear"));
         shear->setGeometry(QRect(420, 100, 71, 25));
         tabWidget->addTab(tab_5, QString());
+        tab_7 = new QWidget();
+        tab_7->setObjectName(QStringLiteral("tab_7"));
+        addPointCurve = new QPushButton(tab_7);
+        addPointCurve->setObjectName(QStringLiteral("addPointCurve"));
+        addPointCurve->setGeometry(QRect(200, 70, 121, 31));
+        drawCurve = new QPushButton(tab_7);
+        drawCurve->setObjectName(QStringLiteral("drawCurve"));
+        drawCurve->setGeometry(QRect(200, 160, 121, 31));
+        tabWidget->addTab(tab_7, QString());
         timeLabel = new QLabel(centralWidget);
         timeLabel->setObjectName(QStringLiteral("timeLabel"));
         timeLabel->setGeometry(QRect(530, 420, 181, 21));
@@ -835,7 +847,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -926,6 +938,9 @@ public:
         label_20->setText(QApplication::translate("MainWindow", "sh-X", Q_NULLPTR));
         shear->setText(QApplication::translate("MainWindow", "Shear", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Transformation", Q_NULLPTR));
+        addPointCurve->setText(QApplication::translate("MainWindow", "Add point", Q_NULLPTR));
+        drawCurve->setText(QApplication::translate("MainWindow", "Draw curve", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "Bezier Curve", Q_NULLPTR));
         timeLabel->setText(QApplication::translate("MainWindow", " Time taken: ", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Change grid size", Q_NULLPTR));
         Draw->setText(QApplication::translate("MainWindow", "Draw", Q_NULLPTR));

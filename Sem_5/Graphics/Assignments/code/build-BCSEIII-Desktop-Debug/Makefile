@@ -58,7 +58,8 @@ SOURCES       = ../src/main.cpp \
 		../src/ellipse_drawing.cpp \
 		../src/polygon_filling.cpp \
 		../src/transformation.cpp \
-		../src/clipping.cpp moc_mainwindow.cpp \
+		../src/clipping.cpp \
+		../src/bezier_curve.cpp moc_mainwindow.cpp \
 		moc_my_label.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
@@ -69,6 +70,7 @@ OBJECTS       = main.o \
 		polygon_filling.o \
 		transformation.o \
 		clipping.o \
+		bezier_curve.o \
 		moc_mainwindow.o \
 		moc_my_label.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
@@ -154,7 +156,8 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../src/ellipse_drawing.cpp \
 		../src/polygon_filling.cpp \
 		../src/transformation.cpp \
-		../src/clipping.cpp
+		../src/clipping.cpp \
+		../src/bezier_curve.cpp
 QMAKE_TARGET  = BCSEIII
 DESTDIR       = 
 TARGET        = BCSEIII
@@ -339,7 +342,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../src/mainwindow.h ../src/my_label.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/main.cpp ../src/mainwindow.cpp ../src/my_label.cpp ../src/line_drawing.cpp ../src/circle_drawing.cpp ../src/ellipse_drawing.cpp ../src/polygon_filling.cpp ../src/transformation.cpp ../src/clipping.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/main.cpp ../src/mainwindow.cpp ../src/my_label.cpp ../src/line_drawing.cpp ../src/circle_drawing.cpp ../src/ellipse_drawing.cpp ../src/polygon_filling.cpp ../src/transformation.cpp ../src/clipping.cpp ../src/bezier_curve.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../src/mainwindow.ui $(DISTDIR)/
 
 
@@ -445,6 +448,11 @@ clipping.o: ../src/clipping.cpp ../src/mainwindow.h \
 		ui_mainwindow.h \
 		../src/my_label.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clipping.o ../src/clipping.cpp
+
+bezier_curve.o: ../src/bezier_curve.cpp ../src/mainwindow.h \
+		ui_mainwindow.h \
+		../src/my_label.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bezier_curve.o ../src/bezier_curve.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

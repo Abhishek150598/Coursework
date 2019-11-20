@@ -92,6 +92,10 @@ private slots:
 
     void on_shear_clicked();
 
+    void on_addPointCurve_clicked();
+
+    void on_drawCurve_clicked();
+
 private:
     Ui::MainWindow *ui;
     QImage img;
@@ -101,6 +105,7 @@ private:
     QColor boundaryColor, fillColor, bgColor;
     QVector <QPair <QPoint, QPoint> > lines;
     QVector <QPair <int, int> > polygonVertices;
+    QVector <QPoint> bez;
     int a, b;
     int radius;
     int gridSize;
@@ -152,6 +157,8 @@ private:
     int getCoordY(int);
     void resetCanvas();
     void swap();
+    int nCr(int, int);
+    int fact(int);
     enum region{left = 1, right = 2, bottom = 4, top = 8};
 };
 
