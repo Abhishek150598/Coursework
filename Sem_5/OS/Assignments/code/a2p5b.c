@@ -1,4 +1,4 @@
-
+// User 1
 #include <stdio.h> 
 #include <string.h> 
 #include <fcntl.h> 
@@ -14,19 +14,20 @@ int main()
     char arr1[80], arr2[80]; 
     while (1) 
     { 
+        // Opening the FIFO for writing
         fd = open(myfifo, O_WRONLY); 
-        printf("user2:");
+        printf("User_1:");
         fgets(arr2, 80, stdin); 
-        if(strcmp(arr2,"bye")==0 || strcmp(arr2,"BYE")==0)
-        {
-            close(fd);
-            break;
-        }
         write(fd, arr2, strlen(arr2)+1); 
         close(fd); 
+
+        if(strcmp(arr2,"bye")==0 || strcmp(arr2,"BYE")==0)
+            break;
+
+        // Opening the FIFO for reading
         fd = open(myfifo, O_RDONLY); 
         read(fd, arr1, sizeof(arr1)); 
-        printf("user1: %s\n", arr1); 
+        printf("User_2: %s\n", arr1); 
         close(fd); 
     } 
     return 0; 
