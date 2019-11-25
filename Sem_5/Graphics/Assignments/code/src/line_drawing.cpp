@@ -6,7 +6,6 @@ void MainWindow::on_set_point1_clicked()
 {
     p1.setX(getPixelX(ui->frame->x));
     p1.setY(getPixelY(ui->frame->y));
-
 }
 
 // Set p2 when Set Point 2 button is clicked
@@ -91,7 +90,6 @@ void MainWindow::drawDDA()
 
     // Calculating slope of the line
     double m = double(p2.y() - p1.y()) / double(p2.x() - p1.x());
-
 
     // For |m| <= 1, increment x by 1 and y by m
     if(abs(m) <= 1.0)
