@@ -1,0 +1,10 @@
+int main(int abc, float pqr)
+{
+	// Single LINE comment
+	/* Multiline 
+	comment 
+	*/
+	float _ab = 99+89.6;
+	int 8abc;
+	return pqr;
+}
