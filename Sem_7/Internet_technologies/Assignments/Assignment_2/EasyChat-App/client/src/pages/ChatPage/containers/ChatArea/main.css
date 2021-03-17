@@ -1,0 +1,8 @@
+.chatArea {
+    flex: 8;
+    background-color:#dbc4ff;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    overflow-y: scroll;
+}

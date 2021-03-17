@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="well well-lg form">
+		<h2>Search flights</h2><br>
+		<form action="/TravelThroughAir/flights" method="get">
+			
+			<label for="departureCity">Departure city:</label><br>
+			<select id="departureCity" name="departureCity">
+			    <option value="Delhi">Delhi</option>
+			    <option value="Agra">Agra</option>
+			    <option value="Kolkata">Kolkata</option>
+			    <option value="Patna">Patna</option>
+			    <option value="Shimla">Shimla</option>
+			    <option value="Hyderabad">Hyderabad</option>
+			    <option value="Jaipur">Jaipur</option>
+			    <option value="Bhopal">Bhopal</option>
+			</select>
+			<br><br>
+			<label for="arrivalCity">Arrival city:</label><br>
+			<select id="arrivalCity" name="arrivalCity">
+			    <option value="Delhi">Delhi</option>
+			    <option value="Agra">Agra</option>
+			    <option value="Kolkata">Kolkata</option>
+			    <option value="Patna">Patna</option>
+			    <option value="Shimla">Shimla</option>
+			    <option value="Hyderabad">Hyderabad</option>
+			    <option value="Jaipur">Jaipur</option>
+			    <option value="Bhopal">Bhopal</option>
+			</select>
+			<br><br>
+			<label for="departureTime">Departure time:</label><br>
+			<input type="time" name="departureTime" /><br><br><br>	
+			<button type="submit">Search</button>
+		</form> 
+	</div>
+</body>
+</html>

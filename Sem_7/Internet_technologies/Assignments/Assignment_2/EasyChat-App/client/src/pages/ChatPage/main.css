@@ -1,0 +1,23 @@
+.chatPage {
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.leftArea {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+}
+
+.rightArea {
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+}
+
+
+

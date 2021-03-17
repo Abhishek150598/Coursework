@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.register-form {
+	background-color: #ccc8bc;
+	padding: 2% 1%;
+}
+
+.login-form {
+	background-color: #ccc8bc;
+	margin-top: 1%;
+	padding: 2% 1%;
+}

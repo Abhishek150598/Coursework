@@ -1,0 +1,9 @@
+.textArea {
+    flex: 1;
+}
+
+.text {
+    background-color: white;
+    border-radius: 5px;
+    color: black
+}

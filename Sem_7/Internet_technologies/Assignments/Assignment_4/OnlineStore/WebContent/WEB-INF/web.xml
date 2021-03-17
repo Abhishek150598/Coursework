@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  
+  <context-param>
+	<param-name>connString</param-name>
+	<param-value>jdbc:mysql://localhost:3306/onlineStore</param-value>
+  </context-param>
+
+  <context-param>
+	<param-name>connUser</param-name>
+	<param-value>root</param-value>
+  </context-param>
+
+  <context-param>
+	<param-name>connPwd</param-name>
+	<param-value>pass1234</param-value>
+  </context-param>
+  
+  <servlet>
+  	<servlet-name>Register</servlet-name>
+  	<servlet-class>RegisterServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>Register</servlet-name>
+  	<url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>Login</servlet-name>
+  	<servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>Login</servlet-name>
+  	<url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ItemsList</servlet-name>
+  	<servlet-class>ItemsListServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>ItemsList</servlet-name>
+  	<url-pattern>/itemsList</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ItemDetails</servlet-name>
+  	<servlet-class>ItemDetailsServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>ItemDetails</servlet-name>
+  	<url-pattern>/itemDetails</url-pattern>
+  </servlet-mapping>
+</web-app>

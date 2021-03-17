@@ -1,0 +1,52 @@
+.messageDiv {
+    border-radius: 10px;
+    padding: 1% 1%;
+    margin: 1% 1%;
+    font-size: 15px;
+    font-family: arial;
+    box-shadow: 2px 2px grey;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    min-width: 120px;
+    max-width: 500px;
+}
+
+.sentMessageDiv {
+    background-color: #6467bd;
+    color: white;
+    align-self: flex-end;
+}
+
+.receivedMessageDiv {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    align-self: flex-start;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;   
+}
+
+.body {
+    display: flex;
+    flex-direction: row;
+}
+
+.sender {
+    margin-top: -0.1em;
+    margin-bottom: -0.1em;
+}
+
+.time {
+    font-size: 10px;
+    margin-top: -0.1em;
+    margin-bottom: -0.1em;
+}
+
+.message {
+    margin-bottom: -0.1em;
+}

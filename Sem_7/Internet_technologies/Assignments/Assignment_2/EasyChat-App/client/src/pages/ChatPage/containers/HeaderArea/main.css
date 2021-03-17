@@ -1,0 +1,15 @@
+@import url(https://fonts.googleapis.com/css2?family=Lobster&display=swap);
+
+.headerArea {
+    flex: 1;
+}    
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.headerIcons {
+}
+

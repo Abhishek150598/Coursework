@@ -1,0 +1,21 @@
+.contactHeader {
+    flex: 1;    
+}
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nameAndAvatar {
+    flex: 8;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.contactName {
+    padding-left: 2%;
+}
